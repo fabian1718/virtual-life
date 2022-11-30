@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getAllCarts, createCarts } = require('../Controllers/carts.controllers');
+const { getAllCarts, createCarts } = require('../controllers/carts.controllers');
 const router = Router();
 
 //Get all users
