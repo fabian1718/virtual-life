@@ -4,10 +4,10 @@ const cors = require("cors");
 const db = require("./utils/database");
 const handleError = require("./middlewares/error.middleware");
 const initModels = require("./models/initModels");
-const userRoutes = require('./Routes/users.routes');
-const productRoutes = require('./Routes/products.routes');
-const cartRoutes = require('./Routes/carts.routes');
-const orderRoutes = require('./Routes/orders.routes');
+const userRoutes = require('./routes/users.routes');
+const productRoutes = require('./routes/products.routes');
+const cartRoutes = require('./routes/carts.routes');
+const orderRoutes = require('./routes/orders.routes');
 
 const app = express();
 
