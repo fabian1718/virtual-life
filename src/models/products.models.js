@@ -65,7 +65,7 @@ const Products = db.define("products", {
   },
   status: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
+    defaultValue: true,
   },
   userId: {
     type: DataTypes.INTEGER,
