@@ -1,21 +1,29 @@
 const UserServices = require("../services/users.services");
+const CartsServices = require("../services/carts.services")
 const welcomeTemplate = require("../templates/welcome");
 const transporter = require("../utils/mailer");
 
 
-const getAllUsers = async (req, res) =>{
+const getAllUsers = async (req, res, netx) =>{
     try {
-        const result = await UserServices.getAll();
+        const offset = req.query.offset ?? 0;
+        const limit = req.query.limit ?? 3;
+        const result = await UserServices.getAll(offset, limit);
         res.status(200).json(result);
     } catch (error) {
-        console.log(error);
+        netx({
+            status: 400,
+            errorContent: error,
+            message: "Algo salio mal",
+          });
     }
 }
 
-const createUsers = async (req, res) =>{
+const createUsers = async (req, res, netx) =>{
     try {
         const newUser = req.body;
         const result = await UserServices.createUsers(newUser);
+        const cart = await CartsServices.createCarts(result.id);
         res.status(201).json(result);
         transporter.sendMail({
             from: "<fagodu5@gmail.com>",
@@ -25,7 +33,7 @@ const createUsers = async (req, res) =>{
             html: welcomeTemplate(result.userName)
         });
     } catch (error) {
-        console.log(error);
+        netx({status: 418, errorContent: error, message: "Revisa la información enviada"});
     }
 }
 

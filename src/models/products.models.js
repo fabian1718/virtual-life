@@ -18,6 +18,9 @@ const { DataTypes } = require("sequelize");
  *         availableQty:
  *           type: integer
  *           example: 2
+ *         imageurl:
+ *           type: string
+ *           example: "http://urlimagen"
  *         status:
  *           type: boolean
  *           example: true
@@ -36,6 +39,9 @@ const { DataTypes } = require("sequelize");
  *         availableQty:
  *           type: integer
  *           example: 2
+ *         imageurl:
+ *           type: string
+ *           example: "http://urlimagen"
  *         status:
  *           type: boolean
  *           example: true
@@ -62,6 +68,9 @@ const Products = db.define("products", {
   availableQty: {
     type: DataTypes.INTEGER,
     allowNull: false,
+  },
+  imageurl: {
+    type: DataTypes.STRING,
   },
   status: {
     type: DataTypes.BOOLEAN,

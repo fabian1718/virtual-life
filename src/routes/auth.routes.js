@@ -1,21 +1,20 @@
-const { Router } = require('express');
-const { getAllUsers, createUsers } = require('../controllers/users.controllers');
-const router = Router();
+const { Router } = require("express");
+const { userLogin } = require("../controllers/auth.controllers");
 
-//POST user
+//lOGIN
 /**
  * @openapi
- * /api/v1/users:
+ * /api/v1/auth/login:
  *   post:
- *     summary: Registro de usuario
- *     tags: [users]
+ *     summary: login
+ *     tags: [Login]
  *     requestBody:
  *       description: To register a new user you need a userName, email, and password
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: "#/components/schemas/register"
+ *             $ref: "#/components/schemas/registerLogin"
  *     responses:
  *       201:
  *         description: OK
@@ -30,15 +29,13 @@ const router = Router();
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: "#/components/schemas/users"
+ *                     $ref: "#/components/schemas/login"
  *
  */
 
 
-// optener todos los usuarios
-router.get('/users', getAllUsers);
+const router = Router();
 
-// crear usuarios
-router.post('/users', createUsers);
+router.post("/auth/login", userLogin);
 
 module.exports = router;

@@ -10,16 +10,17 @@ class Cartservices {
         }
     }
     
-    static async createCarts(newCart) {
+    static async createCarts(id) {
         try {
-            const result = await Carts.create(newCart); // select * Carts
+            const result = await Carts.create({
+                userId: id,
+                totalPrice: 0
+            }); // select * Carts
             return result;
         } catch (error) {
             throw(error);
         }
     }
 }
-
-
 
 module.exports = Cartservices;

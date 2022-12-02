@@ -1,9 +1,20 @@
 const Products = require("../models/products.models");
+const ProductsInOrder = require("../models/productInOrders.models");
+const Orders = require("../models/orders.models");
+const Users = require("../models/users.models");
 
 class ProductsServices {
-    static async getAll() {
+    static async getAll(id) {
         try {
-            const result = await Products.findAll(); 
+            const result = await Products.findAll({
+                where: {userId: id},
+                attributes: ["id", "name", "price", "availableQty"],
+                include: {
+                    model: Users,
+                    attributes: ["userName"],
+
+                } 
+            }); 
             return result;
         } catch (error) {
             throw(error);

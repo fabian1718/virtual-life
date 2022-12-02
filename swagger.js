@@ -8,19 +8,34 @@ const options ={
         info: {
             title: "Virtual Life",
             version: "1.0.0",
-            description: "API para crear tienda de productos de tecnologia"
+            description: "API para crear tiendas Online"
         }
     },
     //rutas y modelos de tablas a documentar 
     apis: [
         "./src/routes/users.routes.js",
+
+        "./src/routes/auth.routes.js",
+
         "./src/routes/products.routes.js",
+
+        "./src/routes/productInCarts.routes.js",
+
         "./src/routes/carts.routes.js",
+
         "./src/routes/orders.routes.js",
+
+
         "./src/models/users.models.js",
+
         "./src/models/products.models.js",
+
+        "./src/models/productInCarts.models.js",
+
         "./src/models/carts.models.js",
+
         "./src/models/orders.models.js",
+
     ]
 }
 

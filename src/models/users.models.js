@@ -1,5 +1,6 @@
 const db = require("../utils/database");
 const { DataTypes } = require("sequelize");
+const bcrypt = require("bcrypt");
 
 //para el POST
 /**
@@ -30,8 +31,37 @@ const { DataTypes } = require("sequelize");
  *         password:
  *           type: string
  *           example: 1234
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       beareFormat: JWT
  */
 
+//para el POST
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     login:
+ *       type: object
+ *       properties:
+ *         email:
+ *           type: string
+ *           example: usuario@gmail.com
+ *         password:
+ *           type: string
+ *           example: 1234
+ *     registerLogin:
+ *       type: object
+ *       properties:
+ *         email:
+ *           type: string
+ *           example: usuario@gmail.com
+ *         password:
+ *           type: string
+ *           example: 1234
+ */
 
 const Users = db.define("users", {
   id: {
@@ -54,6 +84,14 @@ const Users = db.define("users", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+},{
+  hooks: {
+    beforeCreate: (user, options) => {
+      const { password } = user; 
+      const hash = bcrypt.hashSync(password, 8); // encripta la contraseña
+      user.password = hash;
+    }
+  }
 });
 
 module.exports = Users;

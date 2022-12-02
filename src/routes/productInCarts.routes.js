@@ -1,21 +1,21 @@
 const { Router } = require('express');
-const { getAllUsers, createUsers } = require('../controllers/users.controllers');
+const { addProductsToCart } = require('../controllers/productInCarts.controllers');
 const router = Router();
 
-//POST user
+//POST crear un nuevo producto
 /**
  * @openapi
- * /api/v1/users:
+ * /api/v1/add:
  *   post:
- *     summary: Registro de usuario
- *     tags: [users]
+ *     summary: Agrega un productos al carrito
+ *     tags: [addProductsToCart]
  *     requestBody:
- *       description: To register a new user you need a userName, email, and password
+ *       description: To register a new user you need a cartId, productId, quantity and price
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: "#/components/schemas/register"
+ *             $ref: "#/components/schemas/registerAdd"
  *     responses:
  *       201:
  *         description: OK
@@ -30,15 +30,11 @@ const router = Router();
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: "#/components/schemas/users"
+ *                     $ref: "#/components/schemas/add"
  *
  */
 
-
-// optener todos los usuarios
-router.get('/users', getAllUsers);
-
-// crear usuarios
-router.post('/users', createUsers);
+// adicionar productos al carrito
+router.post('/add', addProductsToCart);
 
 module.exports = router;

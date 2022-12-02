@@ -8,6 +8,8 @@ const userRoutes = require('./routes/users.routes');
 const productRoutes = require('./routes/products.routes');
 const cartRoutes = require('./routes/carts.routes');
 const orderRoutes = require('./routes/orders.routes');
+const authRoutes = require('./routes/auth.routes');
+const addProductRoutes = require("./routes/productInCarts.routes");
 
 const app = express();
 
@@ -27,15 +29,22 @@ db.sync({ force: false })
 
 app.get("/", (req, res) => {
   console.log("Bienvenido al server");
+  res.json({
+    message: "Bienvenido al a virtual life" 
+  })
 });
 
 app.use('/api/v1', userRoutes);
+
+app.use("/api/v1", authRoutes);
 
 app.use('/api/v1', productRoutes);
 
 app.use('/api/v1', cartRoutes);
 
 app.use('/api/v1', orderRoutes);
+
+app.use('/api/v1', addProductRoutes);
 
 app.use(handleError);
 

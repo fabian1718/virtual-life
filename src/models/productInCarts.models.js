@@ -1,6 +1,43 @@
 const db = require("../utils/database");
 const { DataTypes } = require("sequelize");
 
+//para el agregar productos
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     add:
+ *       type: object
+ *       properties:
+ *         cartId:
+ *           type: integer
+ *           example: 1
+ *         productId:
+ *           type: integer
+ *           example: 1
+ *         quantity:
+ *           type: integer
+ *           example: 10
+ *         price:
+ *           type: float
+ *           example: 200000
+ *     registerAdd:
+ *       type: object
+ *       properties:
+ *         cartId:
+ *           type: integer
+ *           example: 1
+ *         productId:
+ *           type: integer
+ *           example: 1
+ *         quantity:
+ *           type: integer
+ *           example: 10
+ *         price:
+ *           type: float
+ *           example: 200000
+ */
+
 const ProductInCarts = db.define("productInCarts", {
   id: {
     type: DataTypes.INTEGER,
@@ -28,7 +65,7 @@ const ProductInCarts = db.define("productInCarts", {
   },
   status: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
+    defaultValue: true,
   },
 });
 
