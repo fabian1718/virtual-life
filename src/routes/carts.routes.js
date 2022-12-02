@@ -1,14 +1,21 @@
 const { Router } = require('express');
 const { getAllCarts, addProductsToCart } = require('../controllers/carts.controllers');
+const authenticate = require('../middlewares/auth.middleware');
 const router = Router();
 
-//Get all users
+//Get all products
 /**
  * @openapi
- * /api/v1/carts:
+ * /api/v1/carts/{id}:
  *   get:
- *     summary: optiene el carrito de compras
+ *     security:
+ *       - bearerAuth: []
+ *     summary: optiene los productos que usuario tiene en el carrito
  *     tags: [carts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         require: true
  *     responses:
  *       200:
  *         description: OK
@@ -26,7 +33,7 @@ const router = Router();
 
 
 // optener todos los usuarios
-router.get('/carts', getAllCarts);
+router.get('/carts/:id', authenticate, getAllCarts);
 
 
 module.exports = router;

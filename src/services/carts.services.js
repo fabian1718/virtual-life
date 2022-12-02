@@ -1,9 +1,18 @@
 const Carts = require("../models/carts.models");
+const Users = require("../models/users.models");
 
 class Cartservices {
-    static async getAll() {
+    static async getAll(id) {
         try {
-            const result = await Carts.findAll(); // select * Carts
+            const result = await Carts.findAll({
+                where: {userId: id},
+                attributes: ["totalPrice"],
+                include: {
+                    model: Users,
+                    attributes: ["userName"],
+
+                } 
+            }); 
             return result;
         } catch (error) {
             throw(error);

@@ -3,10 +3,16 @@ const CartServices = require("../services/carts.services");
 
 const getAllCarts = async (req, res, next) =>{
     try {
-        const result = await CartServices.getAll();
+        const { id } = req.params;
+        const result = await CartServices.getAll(id);
         res.status(200).json(result);
     } catch (error) {
-        next(error);
+        next({
+            status: 400,
+            errorContent: error,
+            message: "Algo salio mal",
+        }
+    );
     }
 }
 

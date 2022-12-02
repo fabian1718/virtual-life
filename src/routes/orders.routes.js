@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { getAllOrders, createOrders } = require('../controllers/orders.controllers');
+const authenticate = require('../middlewares/auth.middleware');
 const router = Router();
 
 //Get all orders
@@ -7,6 +8,8 @@ const router = Router();
  * @openapi
  * /api/v1/orders:
  *   get:
+ *     security:
+ *       - bearerAuth: []
  *     summary: optiene todas las ordenes
  *     tags: [orders]
  *     responses:
@@ -27,6 +30,8 @@ const router = Router();
  * @openapi
  * /api/v1/orders:
  *   post:
+ *     security:
+ *       - bearerAuth: []
  *     summary: Agrega un nuevo producto
  *     tags: [orders]
  *     requestBody:
@@ -56,9 +61,9 @@ const router = Router();
 
 
 // optener todos los usuarios
-router.get('/orders', getAllOrders);
+router.get('/orders', authenticate, getAllOrders);
 
 // crear usuarios
-router.post('/orders', createOrders);
+router.post('/orders', authenticate, createOrders);
 
 module.exports = router;
